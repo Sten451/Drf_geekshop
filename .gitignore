@@ -1,0 +1,7 @@
+.idea 
+pycache/ 
+db.sqlite3
+__pycache__/
+/media
+dump.bat
+.env
