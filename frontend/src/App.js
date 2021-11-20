@@ -1,8 +1,10 @@
-import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import React from "react";
 import axios from "axios";
 import UserList from "./components/User";
+import Menu from "./components/Menu";
+import Footer from "./components/Footer";
 
 class App extends React.Component {
     constructor(props) {
@@ -28,7 +30,11 @@ class App extends React.Component {
   {
     return (
         <div>
+        <Menu />
+        <div className='mt-3 m-lg-3'>
           <UserList users={this.state.users} />
+        </div>
+        <Footer />
         </div>
     );
   }
