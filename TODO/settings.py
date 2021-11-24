@@ -25,8 +25,11 @@ SECRET_KEY = 'django-insecure-k-$0-&ejov9)4)y!#(2$p50*5emk1)3u0dued*b(yp2531o&bt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
+CORS_ALLOWED_ORIGINS =[
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+]
 
 # Application definition
 
@@ -39,12 +42,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'rest_framework',
+    'corsheaders',
+    'project'
 
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -128,3 +134,12 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.Users'
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer'
+    ]
+}
+
+if DEBUG:
+    REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'].append('rest_framework.renderers.BrowsableAPIRenderer')
