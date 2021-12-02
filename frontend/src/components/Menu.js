@@ -8,11 +8,11 @@ const Menu = () => {
         <div>
             <Navbar bg="dark" variant="dark">
                 <Container>
-                    <Navbar.Brand href="#">Test1</Navbar.Brand>
+                    <Navbar.Brand href="/">MAIN</Navbar.Brand>
                     <Nav className="me-auto">
-                        <Nav.Link href="#">Test2</Nav.Link>
-                        <Nav.Link href="#">Test3</Nav.Link>
-                        <Nav.Link href="#">Test4</Nav.Link>
+                        <Nav.Link href="#/todo">TODO</Nav.Link>
+                        <Nav.Link href="#/project">Project</Nav.Link>
+                        
                     </Nav>
                 </Container>
             </Navbar>
