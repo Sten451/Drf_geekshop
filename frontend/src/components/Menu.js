@@ -3,6 +3,7 @@ import {Navbar} from "react-bootstrap";
 import {Container} from "react-bootstrap";
 import {Nav} from "react-bootstrap";
 
+
 const Menu = () => {
     return (
         <div>
@@ -10,9 +11,8 @@ const Menu = () => {
                 <Container>
                     <Navbar.Brand href="/">MAIN</Navbar.Brand>
                     <Nav className="me-auto">
-                        <Nav.Link href="#/todo">TODO</Nav.Link>
-                        <Nav.Link href="#/project">Project</Nav.Link>
-                        
+                        <Nav.Link href="/todo">TODO</Nav.Link>
+                        <Nav.Link href="/project">Project</Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>

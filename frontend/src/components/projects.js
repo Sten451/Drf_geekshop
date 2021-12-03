@@ -1,5 +1,6 @@
 import React from 'react'
 import {Table} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 
 
@@ -8,7 +9,7 @@ const ProjectItem = ({project}) => {
         <tbody>
         <tr>
             <td>{project.id}</td>
-            <td>{project.name}</td>
+            <td><Link to={`project/${project.id}`}>{project.name}</Link></td>
             <td>{project.url}</td>
             <td>{project.users}</td>
         </tr>

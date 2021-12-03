@@ -5,9 +5,11 @@ import axios from "axios";
 import UserList from "./components/User";
 import Menu from "./components/Menu";
 import Footer from "./components/Footer";
-import {HashRouter, Route} from "react-router-dom";
+import {Route, BrowserRouter, Switch} from "react-router-dom";
 import ProjectList from './components/projects.js'
 import TodoList from './components/todos.js'
+import NotFound404 from "./components/404";
+import ProjectInfo from "./components/Projectinfo";
 
 class App extends React.Component {
     constructor(props) {
@@ -57,15 +59,20 @@ class App extends React.Component {
   {
     return (
         <div>
-        <HashRouter>
+        <BrowserRouter>
         <Menu />
         <div className='mt-3 m-lg-3'>
+            <Switch>
           <Route exact path='/' component={() => <UserList users={this.state.users}/>}/>
           <Route exact path='/project' component={() => <ProjectList projects={this.state.projects}/>}/>
           <Route exact path='/todo' component={() => <TodoList todos={this.state.todos}/>}/>
+          <Route path='/project/:id'>
+              <ProjectInfo todos={this.state.todos} projects={this.state.projects}/></Route>
+          <Route component={NotFound404}/>
+            </Switch>
         </div>
         <Footer />
-        </HashRouter>
+        </BrowserRouter>
         </div>
     );
   }
