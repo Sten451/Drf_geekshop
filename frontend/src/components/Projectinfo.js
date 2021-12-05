@@ -1,5 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
+import {Table} from "react-bootstrap"
 
 
 const TodoItem = ({todo, projects}) => {
@@ -11,7 +12,8 @@ const TodoItem = ({todo, projects}) => {
             <td>{todo.created_at}</td>
             <td>{todo.updated_at}</td>
             <td>
-                {todo.project.map((projectID) => {return projects.find((project) => project.id === projectID).name})}
+                {todo.project.map((projectID) => {let project = projects.find((project) => project.id === projectID)
+                    if(project){return project.name}})}
             </td>
         </tr>
    )
@@ -21,16 +23,19 @@ const ProjectInfo = ({todos, projects}) => {
     let {id} = useParams();
     let filtered_items = todos.filter((todo => todo.project.includes(parseInt(id))))
     return (
-       <table>
-           <th>What todo</th>
+       <Table striped bordered hover>
+          <thead>
+           <tr>
+           <th>TODO</th>
            <th>Active</th>
            <th>From user</th>
            <th>Created</th>
            <th>Updated</th>
            <th>Project</th>
-
+           </tr>
+          </thead>
            {filtered_items.map((todo) => <TodoItem todo={todo} projects={projects}/>)}
-       </table>
+       </Table>
    )
 }
 
