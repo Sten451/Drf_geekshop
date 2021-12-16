@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'project',
     'django_filters',
     'rest_framework.authtoken',
+    'drf_yasg',
 
 ]
 
@@ -148,7 +149,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.TokenAuthentication',
 
-]
+    ],
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.AcceptHeaderVersioning',
 }
 
 if DEBUG:
