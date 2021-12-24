@@ -42,10 +42,10 @@ class TodoModelViewSet(ModelViewSet):
     pagination_class = TODOPagination
     filterset_class = TodoFilter
 
-    def destroy(self, request, *args, **kwargs):
+    """def destroy(self, request, *args, **kwargs):
         todo3 = self.get_object()
         if todo3.is_active == True:
             todo3.is_active = False
             todo3.save()
-        return Response(status=status.HTTP_202_ACCEPTED)
+        return Response(status=status.HTTP_202_ACCEPTED)"""
 

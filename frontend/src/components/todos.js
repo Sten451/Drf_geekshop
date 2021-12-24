@@ -1,8 +1,9 @@
 import React from 'react'
 import {Table} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 
-const TodoItem = ({todo}) => {
+const TodoItem = ({todo, deleteTodo}) => {
     return (
         <tbody>
         <tr>
@@ -13,12 +14,15 @@ const TodoItem = ({todo}) => {
             <td>{todo.is_active===true ? 'yes' : 'no'}</td>
             <td>{todo.created_at}</td>
             <td>{todo.updated_at}</td>
+            <td>
+                <td><button onClick={()=>deleteTodo(todo.id)} className='btn-danger' type="button">Delete</button></td>
+            </td>
         </tr>
         </tbody>
    )
 }
 
-const TodoList = ({todos}) => {
+const TodoList = ({todos, deleteTodo}) => {
    return (
        <Table striped bordered hover>
        <thead>
@@ -32,8 +36,10 @@ const TodoList = ({todos}) => {
            <th>Updated</th>
            </tr>
        </thead>
-           {todos.map((todo) => <TodoItem todo={todo} />)}
-       </Table>
+           {todos.map((todo) => <TodoItem todo={todo} deleteTodo={deleteTodo}/>)}
+       <Link className="btn-info text-decoration-none p-1" to="/todo/create">Создать</Link>
+        </Table>
+
    )
 }
 
