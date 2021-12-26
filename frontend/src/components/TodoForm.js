@@ -4,7 +4,7 @@ import {Col, Container, Form, Row} from "react-bootstrap";
 class TodoForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {project: '', user: '', text: ''}
+        this.state = {project: '', user: '', text: '', is_active: 'True'}
     }
 
     handleChange(event) {
@@ -14,7 +14,8 @@ class TodoForm extends React.Component {
     }
 
     handleSubmit(event) {
-        this.props.createTodo(this.state.project,this.state.user,this.state.text)
+        console.log(this.state.project,this.state.user,this.state.text, this.state.is_active)
+        this.props.createTodo(this.state.project,this.state.user,this.state.text, this.state.is_active)
         event.preventDefault()
     }
 
@@ -56,7 +57,7 @@ class TodoForm extends React.Component {
                         </Row>
                     <br/>
                     <Row>
-                <input className="btn-success" type="submit" value="Сохранить"/>
+                <input className="btn-success" type="submit" value="Save"/>
                     </Row>
                     </Form>
                 </Container>
