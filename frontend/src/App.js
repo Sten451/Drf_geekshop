@@ -58,6 +58,7 @@ class App extends React.Component {
     createTodo(project, user, text) {
         const headers = this.get_headers()
         const data = {project: project, user: user, text: text}
+        console.log(data)
         axios.post(`http://127.0.0.1:8000/api/todo/`, data, {headers})
             .then(response => {
                 this.load_data()
@@ -193,8 +194,7 @@ class App extends React.Component {
           <Route exact path='/todo/create' component={() => <TodoForm project={this.state.projects} users={this.state.users} createTodo={(text, project, user) => this.createTodo(text, project, user)}/>}/>
           <Route exact path='/todo' component={() => <TodoList todos={this.state.todos} deleteTodo={(id)=>this.deleteTodo(id)}/>}/>
           <Route exact path='/login' component={() => <LoginForm get_token={(username,password) => this.get_token(username,password)}/>}/>
-          <Route path='/project/:id'>
-              <ProjectInfo todos={this.state.todos} projects={this.state.projects}/></Route>
+          <Route exact path="/projects/projects/:id" component={() => <ProjectInfo projects={this.state.projects} users={this.state.users} todo={this.state.todos}/>}/>
           <Route component={NotFound404}/>
             </Switch>
         </div>
