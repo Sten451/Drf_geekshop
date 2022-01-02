@@ -3,38 +3,34 @@ import { useParams } from 'react-router-dom'
 import {Table} from "react-bootstrap"
 
 
-const TodoItem = ({todo, projects}) => {
+const ProjectItem = ({project, users, todo}) => {
+
     return (
+        <tbody>
         <tr>
-            <td>{todo.text}</td>
-            <td>{todo.is_active===true ? 'yes' : 'no'}</td>
-            <td>{todo.user}</td>
-            <td>{todo.created_at}</td>
-            <td>{todo.updated_at}</td>
-            <td>
-                {todo.project.map((projectID) => {let project = projects.find((project) => project.id === projectID)
-                    if(project){return project.name}})}
-            </td>
+            <td>{todo.id}</td>
+            <td>{todo.name}</td>
+            <td>{todo.url}</td>
+            <td>{todo.users}</td>
         </tr>
+        </tbody>
    )
 }
 
-const ProjectInfo = ({todos, projects}) => {
+const ProjectInfo = ({projects, users, todo}) => {
     let {id} = useParams();
-    let filtered_items = todos.filter((todo => todo.project.includes(parseInt(id))))
+    let filtered_items = projects.filter((project) => project.id == id)
     return (
        <Table striped bordered hover>
           <thead>
            <tr>
-           <th>TODO</th>
-           <th>Active</th>
-           <th>From user</th>
-           <th>Created</th>
-           <th>Updated</th>
-           <th>Project</th>
+           <th>ID TODO</th>
+           <th>Name</th>
+           <th>URL</th>
+           <th>Users</th>
            </tr>
           </thead>
-           {filtered_items.map((todo) => <TodoItem todo={todo} projects={projects}/>)}
+           {filtered_items.map((todo) => <ProjectItem todo={todo} projects={projects}/>)}
        </Table>
    )
 }
