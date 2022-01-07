@@ -15,14 +15,42 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.decorators.csrf import csrf_exempt
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+from rest_framework.authtoken import views
+from rest_framework.permissions import AllowAny
 from rest_framework.routers import DefaultRouter, SimpleRouter
 from users.views import UsersModelViewSet
+from project.views import TodoModelViewSet, ProjectModelViewSet
+from graphene_django.views import GraphQLView
 
 router = DefaultRouter()
 router.register('users', UsersModelViewSet)
+router.register('project', ProjectModelViewSet)
+router.register('todo', TodoModelViewSet)
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title='TODO',
+        default_version='ver2',
+        description='Document for TODO',
+        contact=openapi.Contact(email='lvv_34@yandex.ru'),
+        license=openapi.License(name='OPENGL License'),
+    ),
+    public=True,
+    permission_classes=(AllowAny,),
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
+    path('api-token-auth/', views.obtain_auth_token),
+    path('api/<str:version>/users', UsersModelViewSet.as_view),
+    path('swagger/', schema_view.with_ui('swagger')),
+    path('swagger/<str:format>/', schema_view.without_ui()),
+
+    path('graphql/',csrf_exempt(GraphQLView.as_view(graphiql=True))),
+
 ]
